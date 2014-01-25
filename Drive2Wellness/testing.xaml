@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Drive2Wellness.testing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Drive2Wellness"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid VerticalAlignment="Top">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Text="1" FontFamily="Segoe UI" FontSize="30" Foreground="#FFFF8234"/>
+            <StackPanel Margin="55,10,0,0" VerticalAlignment="Top" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI" Foreground="#FFFF8234"/>
+                <TextBlock TextWrapping="Wrap" Text="TextBlock" FontSize="18" Margin="0,10,0,0" FontFamily="Segoe UI" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFBFBFBF"/>
+            </StackPanel>
+        </Grid>
+        <ListView HorizontalAlignment="Left" Height="425" Margin="580,215,0,0" VerticalAlignment="Top" Width="315">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Path Grid.ColumnSpan="2" Data="M16.4179,69.1194 C294.03,69.1194 294.03,69.1194 294.03,69.1194" Fill="#FF5F2020" Height="1" Margin="0" Stretch="Fill" Stroke="#FF5F2020" UseLayoutRounding="False" VerticalAlignment="Bottom"/>
+                <TextBlock Grid.Column="0" Text="hello" />
+                <TextBlock Grid.Column="1" Text="hello" />
+            </Grid>
+        </ListView>
+        <!--<Grid HorizontalAlignment="Left" Height="118" Margin="325,178,0,0" VerticalAlignment="Top" Width="138" Background="#FF57B3D8"/>-->
+        
+        
+        
+    </Grid>
+</Page>

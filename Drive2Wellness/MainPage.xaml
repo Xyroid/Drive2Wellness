@@ -1,0 +1,514 @@
+﻿<common:LayoutAwarePage
+    x:Class="Drive2Wellness.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Drive2Wellness"
+    xmlns:helper="using:Drive2Wellness.Helper"
+    xmlns:tile="using:Callisto.Effects"
+    d:DesignWidth="3500"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:datavis="using:WinRTXamlToolkit.Controls.DataVisualization"
+    NavigationCacheMode="Required"
+    xmlns:xamlChart="using:ExtendedChart"
+    xmlns:callisto="using:Callisto.Controls"
+    xmlns:WinRTDatePicker="using:WinRTDatePicker"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Drive2Wellness.Common"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="DatePickerStyle1"
+               TargetType="WinRTDatePicker:DatePicker">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="WinRTDatePicker:DatePicker">
+                        <StackPanel Orientation="Horizontal" Background="{TemplateBinding Background}">
+                            <ComboBox x:Name="_MonthOptions" Width="100" Style="{StaticResource DateComboBoxStyle}"
+                                      HorizontalAlignment="Left"
+                                      Margin="0,5,30,5" />
+                            <ComboBox x:Name="_DayOptions" Width="100" Style="{StaticResource DateComboBoxStyle}"
+                                      HorizontalAlignment="Left"
+                                      Margin="0,5,30,5" />
+                            <ComboBox x:Name="_YearOptions" Width="130" Style="{StaticResource DateComboBoxStyle}"
+                                      HorizontalAlignment="Left"
+                                      Margin="0,5,0,5" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <!--<Setter Property="DayOptionFormat">
+                <Setter.Value>dd</Setter.Value>
+            </Setter>
+            
+            <Setter Property="MonthOptionFormat">
+                <Setter.Value>MM</Setter.Value>
+            </Setter>-->
+            
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="grid" Margin="0" Height="100" VerticalAlignment="Top" Background="#FF5ECAEA">
+            <Image HorizontalAlignment="Left" Margin="121,0,0,0" VerticalAlignment="Center" Source="Assets/HomePageLogo.png" Stretch="None"/>
+        </Grid>
+        <GridView x:Name="gridView"  ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemContainerStyle="{StaticResource GridViewItemStyle}" SelectionMode="None" Margin="0" Grid.Row="1" 
+                   ScrollViewer.HorizontalScrollMode="Auto" Padding="50,70,0,10">
+            <!--Style="{StaticResource GridViewItemStyle}"-->
+
+
+            <Grid Width="390" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Center" Height="530">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="1.3*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Measurement" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="Date" VerticalAlignment="Center" FontSize="20" FontFamily="Segoe UI" Foreground="#FF8A9996"/>
+
+                <WinRTDatePicker:DatePicker Grid.Row="2" x:Name="myDatePicker"
+                                                Style="{StaticResource DatePickerStyle1}"
+                                                DayOptionFormat="dd" MonthOptionFormat="MM" SelectedDateChanged="selectedDate_onChange"/>
+
+                <!--<ComboBox x:Name="cb_day" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="100" Height="40">
+                        <ComboBoxItem Content="hello" IsSelected="True" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                    </ComboBox>
+                    <ComboBox x:Name="cb_month" HorizontalAlignment="Left" Margin="145,10,0,9" Grid.Row="2" VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="100" Height="40">
+                        <ComboBoxItem Content="hello" IsSelected="True" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                    </ComboBox>
+                    <ComboBox x:Name="cb_year" HorizontalAlignment="Left" Margin="290,10,0,9" Grid.Row="2" VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="100" Height="40">
+                        <ComboBoxItem Content="hello" IsSelected="True" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                        <ComboBoxItem Content="hello" />
+                    </ComboBox>-->
+
+                <TextBlock Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Weight" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Margin="220,0,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Blood pressure" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <!--<TextBox x:Name="tb_weight" Style="{StaticResource RichTextBox}" HorizontalAlignment="Left" Margin="0" Grid.Row="4" TextWrapping="Wrap" Text="96 lbs" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18"/>-->
+                <callisto:WatermarkTextBox KeyDown="tb_weight_KeyDown" Name="tb_weight" Watermark="100-400 Pounds" HorizontalAlignment="Left" Margin="0" Grid.Row="4" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18" />
+                <!--<TextBox x:Name="tb_boodPressure" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" TextWrapping="Wrap" Text="96 lbs" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18"/>-->
+                <callisto:WatermarkTextBox KeyDown="tb_weight_KeyDown" Name="tb_boodPressure" Watermark="60/40-240/120" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18" />
+                <TextBlock Margin="0" Grid.Row="5" TextWrapping="Wrap" Text="Oxygen level" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Margin="220,0,0,0" Grid.Row="7" TextWrapping="Wrap" Text="Glucose level" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <!--<TextBox x:Name="tb_oxyzenLevel" HorizontalAlignment="Left" Margin="0" Grid.Row="6" TextWrapping="Wrap" Text="Eg. 96%" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18"/>-->
+                <callisto:WatermarkTextBox KeyDown="tb_weight_KeyDown" Name="tb_oxyzenLevel" Watermark="70%-100%" HorizontalAlignment="Left" Margin="0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18" />
+                <!--<TextBox x:Name="tb_glucozeLevel" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="6" TextWrapping="Wrap" Text="10 mmol/l" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18"/>-->
+                <callisto:WatermarkTextBox KeyDown="tb_weight_KeyDown" Name="tb_glucozeLevel" Watermark="30-375" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="8" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18" />
+                <TextBlock Margin="0" Grid.Row="7" TextWrapping="Wrap" Text="Activity Time" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Margin="220,0,0,0" Grid.Row="5" TextWrapping="Wrap" Text="BMI" FontSize="20" FontFamily="Segoe UI" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cb_activityTime" HorizontalAlignment="Left" Margin="0,8.5" Grid.Row="8" VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="170" Height="40">
+                    <ComboBoxItem Content="0 min" IsSelected="True" />
+                    <ComboBoxItem Content="15 min" />
+                    <ComboBoxItem Content="30 min" />
+                    <ComboBoxItem Content="45 min" />
+                    <ComboBoxItem Content="1 hour" />
+                    <ComboBoxItem Content="1 hour 15 min" />
+                    <ComboBoxItem Content="1 hour 30 min" />
+                    <ComboBoxItem Content="1 hour 45 min" />
+                    <ComboBoxItem Content="2 hour" />
+                    <ComboBoxItem Content="2 hour 15 min" />
+                    <ComboBoxItem Content="2 hour 30 min" />
+                    <ComboBoxItem Content="1 hour 45 min" />
+                    <ComboBoxItem Content="3 hour" />
+                    <ComboBoxItem Content="3 hour 15 min" />
+                    <ComboBoxItem Content="3 hour 30 min" />
+                    <ComboBoxItem Content="3 hour 45 min" />
+                    <ComboBoxItem Content="4 hour" />
+                    <ComboBoxItem Content="4 hour 15 min" />
+                    <ComboBoxItem Content="4 hour 30 min" />
+                    <ComboBoxItem Content="4 hour 45 min" />
+                    <ComboBoxItem Content="5 hour" />
+                </ComboBox>
+                <!--<TextBox x:Name="tb_BMI" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Eg. 19.56" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18"/>-->
+                <callisto:WatermarkTextBox KeyDown="tb_weight_KeyDown" Name="tb_BMI" Watermark="15-55" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="6" VerticalAlignment="Center" Foreground="Gray" Width="170" Height="40" FontSize="18" />
+                <Grid x:Name="grid_generateGraph" tile:Tilt.IsTiltEnabled="True" Margin="0" Grid.Row="9" Height="55" VerticalAlignment="Bottom" Background="#FFFF8234" Tapped="generateGraph_onTapped">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Generate Graph" VerticalAlignment="Center" FontSize="22" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="White"/>
+                </Grid>
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" Height="530" Margin="0" VerticalAlignment="Center" Width="360">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Chart" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <!--<ComboBox Margin="0" Grid.Row="1" VerticalAlignment="Bottom" Foreground="White" FontSize="18" Height="55" Background="#FF5ECAEA">
+                    <ComboBoxItem Content="hello" IsSelected="True" />
+                    <ComboBoxItem Content="hello" />
+                    <ComboBoxItem Content="hello" />
+                    <ComboBoxItem Content="hello" />
+                </ComboBox>-->
+                <ComboBox x:Name="cmbChartType" Margin="0 10 0 0" Grid.Row="1" Height="50" SelectionChanged="cmbChartType_SelectionChanged" SelectedValuePath="Key" 
+                          DisplayMemberPath="Value" Style="{StaticResource ChartTypeComboBoxStyle}"/>
+                
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="55" MinWidth="330" Grid.Row="2" Margin="0 20 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="tbLastWeek" Text="Last Week" Foreground="{StaticResource OrangeTextColor}" Style="{StaticResource GraphSelectorTextBlock}" />
+                    <TextBlock x:Name="tbLastMonth" Text="Last Month" Foreground="{StaticResource LightGrayTextColor}" Style="{StaticResource GraphSelectorTextBlock}" Grid.Column="1" />
+                    <TextBlock x:Name="tbLastYear" Text="Last Year" Foreground="{StaticResource LightGrayTextColor}" Style="{StaticResource GraphSelectorTextBlock}" Grid.Column="2" />
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 5 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="3*"  />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Height="5" Width="Auto" Fill="{StaticResource AppBlueColor}" Grid.Column="1" Grid.ColumnSpan="4"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Height="5" Width="Auto" Fill="{StaticResource AppBlueColor}" Grid.Column="1" />
+                            <Ellipse Tag="Last Week" Height="20" Width="20" Fill="{StaticResource AppBlueColor}" Grid.ColumnSpan="2" Tapped="elipChartDuration_Tapped" />
+                            <Ellipse x:Name="elipLastWeek" Height="10" Width="10" Fill="White" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <Ellipse Tag="Last Month" Height="20" Width="20" Fill="{StaticResource AppBlueColor}" Grid.Column="2" Grid.ColumnSpan="2" Tapped="elipChartDuration_Tapped" />
+                        <Ellipse x:Name="elipLastMonth" Height="10" Width="10" Fill="White" Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed" />
+                        <Grid Grid.Column="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Height="5" Width="Auto" Fill="{StaticResource AppBlueColor}" />
+                            <Ellipse Tag="Last Year" Height="20" Width="20" Fill="{StaticResource AppBlueColor}" Grid.ColumnSpan="2" Tapped="elipChartDuration_Tapped" />
+                            <Ellipse x:Name="elipLastYear" Height="10" Width="10" Fill="White" Grid.ColumnSpan="2" Visibility="Collapsed" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <!--<Grid Margin="0" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Last Week" VerticalAlignment="Bottom" FontSize="14" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="#FFD9D9D9"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Last Month" VerticalAlignment="Bottom" FontSize="14" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="#FFD9D9D9" Grid.Column="1"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Last Year" VerticalAlignment="Bottom" FontSize="14" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="#FFD9D9D9" Grid.Column="2"/>
+                </Grid>-->
+                
+
+                <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="tbReferenceText" FontSize="14.667" TextWrapping="Wrap" Margin="10 10 0 0"/>
+                        <xamlChart:ExtendedChart Width="330" x:Name="Chart" GoalLineOrientation="X" GoalLineStyle="{StaticResource ChartGoalLineStyle}" 
+                                              LegendStyle="{StaticResource NoLegendStyle}" Grid.Row="1" Padding="0 0 30 20">
+
+                            <charting:ColumnSeries DependentValuePath="Value" IndependentValuePath="Date">
+                                <charting:ColumnSeries.IndependentAxis>
+                                    <charting:CategoryAxis Orientation="X" AxisLabelStyle="{StaticResource TiltedXAxisValueLabel}" />
+                                </charting:ColumnSeries.IndependentAxis>
+                                <charting:ColumnSeries.DataPointStyle>
+                                    <Style TargetType="charting:ColumnDataPoint">
+                                        <Setter Property="xamlChart:SetterValueBindingHelper.PropertyBinding">
+                                            <Setter.Value>
+                                                <xamlChart:SetterValueBindingHelper 
+                                                    Type="Control"
+                                                    Property="Background"
+                                                    Binding="{Binding Converter={StaticResource ChartValueToColor}}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:ColumnDataPoint">
+                                                    <Grid>
+                                                        <Rectangle Fill="{TemplateBinding Background}" Stroke="Black"/>
+                                                        <Grid Background="Transparent" Margin="-10 -35 -10 0" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                                                            <Grid.RenderTransform>
+                                                                <CompositeTransform Rotation="45"/>
+                                                            </Grid.RenderTransform>
+                                                            <TextBlock Text="{Binding Converter={StaticResource DoublePrecisionCutter}}" FontWeight="Bold" Margin="2" 
+                                                                        FontSize="11"  RenderTransformOrigin="0.5,0.5" >
+                                                                
+                                                            </TextBlock>
+                                                            <!--FontSize="14.667" TextWrapping="Wrap"-->
+                                                        </Grid>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:ColumnSeries.DataPointStyle>
+                            </charting:ColumnSeries>
+                        </xamlChart:ExtendedChart>
+
+                        <!--<charting:Chart
+                            x:Name="Chart"
+                            Title="Column Chart">
+
+                            <charting:Chart.Series>
+                                <charting:ColumnSeries
+                                    Title="Population"
+                                    ItemsSource="{Binding Items}"
+                                    IndependentValueBinding="{Binding Name}"
+                                    DependentValueBinding="{Binding Value}"
+                                    IsSelectionEnabled="True" />
+                            </charting:Chart.Series>
+                        </charting:Chart>-->
+
+                        <!--<charting:Chart
+                                x:Name="StackedColumn"
+                                Title=""
+                                Margin="0">
+                            <charting:StackedColumnSeries>
+                                <charting:SeriesDefinition
+                                    DependentValuePath="Value"
+                                    IndependentValuePath="Name"
+                                    IsTapEnabled="True"
+                                    Title="Doodad" />
+                                <charting:SeriesDefinition
+                                    DependentValuePath="Value"
+                                    IndependentValuePath="Name"
+                                    IsTapEnabled="True"
+                                    Title="Gizmo" />
+                                <charting:SeriesDefinition
+                                    DependentValuePath="Value"
+                                    IndependentValuePath="Name"
+                                    IsTapEnabled="True"
+                                    Title="Widget" />
+                            </charting:StackedColumnSeries>
+                        </charting:Chart>-->
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" Height="530" Margin="0" VerticalAlignment="Center" Width="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1.8*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Tips" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="Healthy Eating" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#FF63CAE9" FontFamily="Segoe UI"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="AND EXERCISING TIPS" VerticalAlignment="Bottom" FontSize="30" Foreground="#FF63CAE9" FontFamily="Segoe UI" FontWeight="Thin"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,9,0,0" Grid.Row="2" TextWrapping="Wrap" Text="An individual who is 20 pounds or more overweight is twice as likely to develop heart disease." VerticalAlignment="Top" FontSize="18" FontFamily="Segoe UI" FontWeight="Thin" Foreground="#FFFF8234"/>
+                <TextBlock HorizontalAlignment="Left" Margin="0,9,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Here are some healthy eating and exercising tips for Drivers whiles over the road." VerticalAlignment="Bottom" FontSize="18" FontFamily="Segoe UI" FontWeight="Thin" Foreground="#FFB7B7B7"/>
+                <ListView ItemContainerStyle="{StaticResource ListViewItemStyle}" SelectionMode="None" Name="lv_tips" ItemsSource="{Binding}" Margin="0,10,0,0" Grid.Row="3" Grid.RowSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalAlignment="Top">
+                                <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Text="{Binding id}" FontFamily="Segoe UI" FontSize="30" Foreground="#FFFF8234"/>
+                                <StackPanel Margin="55,10,0,0" VerticalAlignment="Top" Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding headings}" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI" Foreground="#FFFF8234"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding tips}" FontSize="18" Margin="0,10,0,0" FontFamily="Segoe UI" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFBFBFBF"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
+
+                <!--<Image HorizontalAlignment="Left" Margin="0,25,0,0" Grid.Row="3" VerticalAlignment="Top" Source="Assets/number1.png" Stretch="None"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="45,30,0,0" Grid.Row="3" TextWrapping="Wrap" Text="First Tip" VerticalAlignment="Top" Foreground="#FFFF8234" FontSize="20"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,140.88" Grid.Row="3" TextWrapping="Wrap" Text="Unsalted walnuts, almonds, pecans, and pistachios are easy and convenient snacks that are full of proteins, vitamins, and minerals." VerticalAlignment="Bottom" FontSize="18" FontFamily="Segoe UI" FontWeight="Thin" Foreground="#FFB7B7B7" Grid.RowSpan="2"/>
+                    <Image HorizontalAlignment="Left" Margin="0,25,0,0" Grid.Row="4" VerticalAlignment="Top" Source="Assets/number2.png" Stretch="None"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="45,30,0,0" Grid.Row="4" TextWrapping="Wrap" Text="Second Tip" VerticalAlignment="Top" Foreground="#FFFF8234" FontSize="20"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0" Grid.Row="4" TextWrapping="Wrap" Text="Bananas which are high in potassium and low in sodium have the perfect ration for preventing high blood pressure and/or stroke." VerticalAlignment="Bottom" FontSize="18" FontFamily="Segoe UI" FontWeight="Thin" Foreground="#FFB7B7B7" Grid.RowSpan="2"/>-->
+            </Grid>
+
+            <Grid Width="330" Height="530" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.1*" />
+                    <RowDefinition Height="4.5*" />
+                    <RowDefinition Height="7*" />
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Questions" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <callisto:WatermarkTextBox x:Name="QueryBox_tBox" Margin="0" Grid.Row="1" TextWrapping="Wrap" Watermark="Enter Your Question" VerticalAlignment="Center" 
+                                           Height="145" FontSize="20" Foreground="#FFC4C3C3" AcceptsReturn="True"/>
+                <Grid x:Name="grid_SendQuery" tile:Tilt.IsTiltEnabled="True" Margin="0,20,0,0" Grid.Row="2" Height="55" VerticalAlignment="Top" Background="#FFFF8234" Tapped="SendQuery_onTapped">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Send Question" VerticalAlignment="Center" FontSize="22" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="White"/>
+                </Grid>
+            </Grid>
+
+            <Grid Height="530" Width="400" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="46*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Previous Questions" FontSize="28" FontFamily="Segoe UI" Foreground="#FF8A9996" Grid.Row="1" VerticalAlignment="Top"/>
+                <Path Data="M14.806,103.612 C326.746,103.612 326.746,103.612 326.746,103.612" Fill="Gray" Height="1" Margin="0" Grid.Row="1" Stretch="Fill" Stroke="Gray" UseLayoutRounding="False" VerticalAlignment="Bottom" StrokeThickness="3.5"/>
+                <ListView ItemContainerStyle="{StaticResource ListViewItemStyle}" SelectionMode="None" ItemsSource="{Binding}" x:Name="listView_QandA" Margin="0" Grid.Row="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalAlignment="Top">
+                                <Image HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Source="Assets/Qmark.png" Stretch="None"/>
+                                <StackPanel Margin="55,10,0,0" VerticalAlignment="Top" Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding question}" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe UI" Foreground="#FFFF8234"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding answer}" FontSize="18" Margin="0,10,0,0" FontFamily="Segoe UI" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFBFBFBF"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+
+            <Grid Height="530" Width="390" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Measurements" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <ComboBox x:Name="CB_categorySelection" SelectionChanged="CB_categorySelection_SelectionChanged_1" HorizontalAlignment="Left" Margin="0" Grid.Row="1" 
+                          VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="184" Height="50" Style="{StaticResource DateComboBoxStyle}">
+                    <ComboBoxItem Content="Weight" IsSelected="True" />
+                    <ComboBoxItem Content="BMI" />
+                    <ComboBoxItem Content="Blood Pressure" />
+                    <ComboBoxItem Content="Oxygen Level" />
+                    <ComboBoxItem Content="Glucose Level" />
+                    
+                    <ComboBoxItem Content="Activity Time" />
+                </ComboBox>
+                <ComboBox x:Name="CB_timePeriodSelection" SelectionChanged="CB_timePeriodSelection_SelectionChanged_1" HorizontalAlignment="Right" Margin="0,15" Grid.Row="1" 
+                          VerticalAlignment="Center" Foreground="#FF8A9996" FontSize="18" Width="184"  Height="50" Style="{StaticResource DateComboBoxStyle}">
+                    <ComboBoxItem Content="Last Week" IsSelected="True" />
+                    <ComboBoxItem Content="Last Month" />
+                </ComboBox>
+                <Grid HorizontalAlignment="Left" Height="30" Margin="0,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="190" Background="#FFFF8234">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+                </Grid>
+                <Grid HorizontalAlignment="Right" Height="30" Margin="0,0,0,10" Grid.Row="2" VerticalAlignment="Bottom" Width="190" Background="#FFFF8234">
+                    <TextBlock x:Name="tb_secondColumn" Text="" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap"  VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+                </Grid>
+
+                <ListView ItemContainerStyle="{StaticResource MeasurementListViewItemStyle}" SelectionMode="None" x:Name="lv_measurmentTable" Grid.Row="3" Margin="10,10,0,0" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Path Grid.ColumnSpan="2" Data="M16.4179,69.1194 C294.03,69.1194 294.03,69.1194 294.03,69.1194" Fill="#FF5ECAEA" Height="1" Margin="0" Stretch="Fill" Stroke="#FF5ECAEA" UseLayoutRounding="False" VerticalAlignment="Bottom"/>
+                                <TextBlock Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="Auto" > <!--Text="{Binding Date}"-->
+                                    <Run Text="{Binding DayOfWeek}" /> <Run Text=" " />
+                                    <Run Text="{Binding Month}" /> <Run Text="-" />
+                                    <Run Text="{Binding DayOfMonth}" /> <Run Text="-" />
+                                    <Run Text="{Binding Year}" />
+                                </TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding categories}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                    
+            </Grid>
+
+            <Grid Height="530" Width="390" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" FontSize="28" FontFamily="Segoe UI" Foreground="#FF4F4F4F"/>
+                <Grid Grid.Row="1" tile:Tilt.IsTiltEnabled="True" Margin="0,20,0,0" Height="55" VerticalAlignment="Top" Background="#FFFF8234" Tapped="grdSettings_Tapped">
+                    <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Center" FontSize="22" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="White"/>
+                </Grid>
+            </Grid>
+
+        </GridView>
+        
+        <Rectangle x:Name="rectangle" Visibility="Collapsed" Grid.RowSpan="2" Stroke="Black" Fill="{StaticResource AppBlueColor}"/>
+        <Image x:Name="image" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.RowSpan="2" 
+               Source="Assets/forLoginLogo.png" Stretch="None" Visibility="Collapsed" />
+
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    
+                	<Storyboard>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridView">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="rectangle">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Visible</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="image">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Visible</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                	</Storyboard>
+                    
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+</common:LayoutAwarePage>

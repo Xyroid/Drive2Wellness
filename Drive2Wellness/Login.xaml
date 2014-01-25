@@ -1,0 +1,101 @@
+﻿<common:LayoutAwarePage
+    x:Name="pageRoot"
+    x:Class="Drive2Wellness.Login"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Drive2Wellness"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tile="using:Callisto.Effects"
+    xmlns:helper="using:Drive2Wellness.Helper"
+    xmlns:callisto="using:Callisto.Controls"
+    xmlns:common="using:Drive2Wellness.Common"
+    mc:Ignorable="d">
+
+    <Grid x:Name="rootGrid">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0,0">
+                <GradientStop Color="#FF66E6FF"/>
+                <GradientStop Color="#FF52A3CC" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <callisto:CustomDialog x:FieldModifier="public" x:Name="emailInputDialog" 
+                               Title="Enter your email address." IsTabStop="False"
+                               BackButtonVisibility="Visible" BackButtonClicked="InputDialog_BackButtonClicked" Background="#FF35BED8" Foreground="White">
+
+            <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                <TextBox x:Name="tBox_eMail" Height="auto" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button Content="Submit" Tapped="submitEmailAddress" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Foreground="Black" />
+            </StackPanel>
+
+        </callisto:CustomDialog>
+
+        <Grid x:Name="contentGrid" HorizontalAlignment="Center" Height="531" Margin="0" VerticalAlignment="Center" Width="412">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="274"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image HorizontalAlignment="Center" Margin="71,0,70,0" VerticalAlignment="Top" Source="Assets/forLoginLogo.png" Stretch="None"/>
+            <TextBox x:Name="uID_tb" Template="{StaticResource TextBoxTemplate}" Foreground="White" FontSize="30.667" Height="65" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <PasswordBox Style="{StaticResource PasswordBoxStyle1}" x:Name="Pass_tb" Height="65"  Margin="0,70,0,0" BorderThickness="0"  Grid.Row="1" VerticalAlignment="Top" FontSize="30.667" Foreground="White" FontWeight="Light"/>
+            <!--<Grid x:Name="grid_LoginButton" tile:Tilt.IsTiltEnabled="True" Height="58" Margin="0" Grid.Row="1" VerticalAlignment="Bottom" Background="#FFFF8234" Tapped="LoginOnTapped">
+                <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+            </Grid>-->
+            <Button Content="Login" Style="{StaticResource LoginButton}"  Grid.Row="1" Tapped="LoginOnTapped" VerticalAlignment="Bottom"/>
+            <Button Content="Signup" Style="{StaticResource LoginButton}"  Grid.Row="2" Tapped="btnSignup_Click" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="tBlock_forgotPass" Margin="0,160,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Forgot your password ?" VerticalAlignment="Top" Foreground="#FF4C7E96" FontSize="24" HorizontalAlignment="Center" Tapped="tb_forgotPassword_onTapped"/>
+
+            <!--<PasswordBox Style="{StaticResource PasswordBoxStyle1}" FontSize="30.667" Foreground="White" FontWeight="Light" Height="65" Margin="0,70,0,0" Grid.Row="1" VerticalAlignment="Top" />-->
+        </Grid>
+        
+        <Image x:Name="image" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Source="Assets/forLoginLogo.png" Stretch="None"/>
+
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    
+                	<Storyboard>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="contentGrid">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="image">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Visible</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="emailInputDialog">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                	</Storyboard>
+                    
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+</common:LayoutAwarePage>

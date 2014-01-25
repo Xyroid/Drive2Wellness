@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="Drive2Wellness.Drive2Wellness" Publisher="CN=A0155A5F-BBC9-4E3F-BB2E-EBDAF07F8330" Version="1.0.0.7" />
+  <Properties>
+    <PublisherDisplayName>Drive2Wellness</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <DisplayName>Drive2Wellness</DisplayName>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Drive2Wellness.App">
+      <VisualElements DisplayName="Drive2Wellness" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Drive2Wellness" ForegroundText="light" BackgroundColor="#52a3cc">
+        <DefaultTile ShowName="noLogos" WideLogo="Assets\WideLogo.png" />
+        <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#52a3cc" />
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
